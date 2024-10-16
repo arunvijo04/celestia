@@ -11,10 +11,10 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen relative overflow-hidden flex flex-col justify-center items-center px-6"> {/* Use flexbox for centering */}
+    <div className="w-full min-h-screen relative flex flex-col items-center justify-center px-4 md:px-8 lg:px-12 py-8">
       {/* Background Image */}
       <img
-        className="w-full h-full object-cover absolute inset-0 z-0" // Cover the entire div and make sure it's behind content
+        className="w-full h-full object-cover absolute inset-0 z-0"
         src={eventsImage}
         alt="Events"
       />
@@ -24,27 +24,34 @@ const Gallery = () => {
 
       {/* Events Heading */}
       <h1
-        id="events-heading" // ID for the heading effect
-        className="relative z-10 text-white text-5xl lg:text-6xl font-['EB Garamond'] transition-transform duration-300 hover:scale-105 text-center mb-4"
+        id="events-heading"
+        className="relative z-10 text-white text-5xl md:text-6xl font-['EB Garamond'] transition-transform duration-300 hover:scale-105 text-center mb-6"
       >
         GALLERY
       </h1>
 
       {/* Text Description */}
       <p
-        id="events-description" // ID for the description effect
-        className="relative z-10 text-white text-lg lg:text-2xl font-['EB Garamond'] text-center max-w-4xl mb-8 transition-transform duration-300 hover:scale-105"
+        id="events-description"
+        className="relative z-10 text-white text-lg md:text-xl lg:text-2xl font-['EB Garamond'] text-center max-w-3xl mb-12"
       >
         Explore a cosmic blend of knowledge and excitement at our Astronomy Club events. From captivating stargazing nights to informative workshops and celestial competitions, join us for stellar experiences that bring the wonders of the universe closer to home.
       </p>
 
-      {/* Event Cards */}
-      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-        {Array.from({ length: 3 }).map((_, index) => (
+      {/* Event Cards in Masonry Grid */}
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+        {Array.from({ length: 6 }).map((_, index) => (
           <div
             key={index}
-            className="w-[90%] sm:w-[300px] h-[300px] bg-[#a6a7ab]/40 rounded-3xl transition-transform duration-300 hover:scale-105"
-          />
+            className="relative bg-[#a6a7ab]/40 rounded-2xl shadow-lg transition-transform duration-300 hover:scale-105 overflow-hidden"
+            style={{ height: `${Math.random() * (400 - 250) + 250}px` }} // Varying heights for masonry effect
+          >
+            <img
+              src={`https://source.unsplash.com/random/800x600?space&sig=${index}`}
+              alt="Event"
+              className="w-full h-full object-cover"
+            />
+          </div>
         ))}
       </div>
 
@@ -62,7 +69,7 @@ const Gallery = () => {
         }
 
         .animate-fade-in {
-          animation: fadeIn 0.8s ease forwards; /* Adjust duration and easing as needed */
+          animation: fadeIn 0.8s ease forwards;
         }
       `}</style>
     </div>
